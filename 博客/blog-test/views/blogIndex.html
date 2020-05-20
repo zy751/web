@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>博客首页</title>
+    <style>
+        #content{
+            margin-top: 40px;
+            display: flex;
+            flex-direction: row;
+        }
+        #search{
+            height: 40px;
+            float: right;
+        }
+    </style>
+    <script>
+        function search() {
+            var keywords=document.getElementById('keyword').value
+            var ev=window.event||ev
+            var target=ev.target||ev.srcElement
+            window.open('/blog/search?keyword='+keywords)
+        }
+    </script>
+</head>
+<body>
+<div id="search">
+    <input id="keyword" type="text" name="keywords" placeholder="请输入关键词">
+    <button onclick="search()">搜索</button>
+</div>
+<div id="content">
+    <div class="left" style="width: 15%;padding-right: 5%;border-right: 1px solid black;height: 550px" >
+        用户名: <%= username %><br>
+        真实姓名: <%= realname %><br>
+        <button><a href="/changePwd">修改密码</a></button>
+        <button ><a href="/logout">注销</a></button><br>
+        <a href="/blog/searchMY">我的博客</a>
+    </div>
+    <div class="right">
+        <% if(dataS) {%>
+        <% dataS.forEach(function(data){ %>
+        <h2><%=data.title %></h2>
+        <a href="/blog/detail?title=<%= data.title %>"><P><%= data.content%></P></a>
+        <% }) %> <% } %>
+        <div id="page">
+            <% if(currentPage===1) {%>
+            <a style='pointer-events: none'>上一页</a><% } else { %>
+            <a href="/blog/index?page=<%=prePage %>">上一页</a><% } %>
+            <a href="/blog/index?page=<%=currentPage %>" style="pointer-events: none;color: gray" ><%= currentPage %></a>
+            <% if(currentPage===pageSum) {%>
+            <a style='pointer-events: none'>下一页</a><% } else {%>
+            <a href="/blog/index?page=<%= nextPage%>">下一页</a><% } %>
+        </div>
+    </div>
+</div>
+</body>
+</html>

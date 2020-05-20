@@ -1,0 +1,1 @@
+<view class="container"><view>wxin</view><button type="primary" data-event-opts="{{[['tap',[['choose',['$event']]]]]}}" bindtap="__e">Choose hobbit</button><text>{{"你的爱好是"+hobbit}}</text><view>哈哈</view></view>

@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/loginindex",
+    "pages/index/index",
+    "pages/paltform",
+    "pages/refresh",
+    "pages/audioplay",
+    "pages/videoplay",
+    "pages/uniui",
+    "pages/image",
+    "pages/canvas"
+  ],
+  "subPackages": [],
+  "window": {
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "uni-app",
+    "navigationBarBackgroundColor": "#007AFF",
+    "backgroundColor": "#FFFFFF",
+    "enablePullDownRefresh": true
+  },
+  "tabBar": {
+    "backgroundColor": "#FFFFFF",
+    "color": "#333333",
+    "list": [
+      {
+        "pagePath": "pages/audioplay",
+        "iconPath": "static/imgs/QQ截图20200410145900.jpg",
+        "selectedIconPath": "static/imgs/QQ截图20200410145900.jpg",
+        "text": "音乐"
+      },
+      {
+        "pagePath": "pages/loginindex",
+        "iconPath": "static/imgs/b576dd79c10afc79942203571d1aabc8.png",
+        "selectedIconPath": "static/imgs/b576dd79c10afc79942203571d1aabc8.png",
+        "text": "我的"
+      }
+    ]
+  },
+  "usingComponents": {}
+}

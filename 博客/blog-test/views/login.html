@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+    <%- include('header.html') %>
+    <style>
+        form{
+            width: 450px;
+            height: 250px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            border: 1px solid red;
+            background-color: rgba(224,255,255,0.5);
+            border-radius: 10px;
+        }
+        form div{
+            width: 80%;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+        }
+        label{
+            width: 60px;
+        }
+        input{
+            margin-bottom: 30px;
+            margin-left: 30px;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="/login">
+        <p style="text-align: center">用户登录</p>
+        <div>
+            <label>用户名:</label><input type="text" name="username"><br>
+            <label>密  码:</label><input type="password" name="pwd"><br>
+        <input type="submit" value="登录" style="float: right">
+        <button style="float: right"><a href="/register">注册</a></button>
+        <% if(msg) {%> <p style="color: red"><%= msg %></p><% } %>
+        </div>
+    </form>
+
+
+</body>
+</html>

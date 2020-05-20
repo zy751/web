@@ -1,0 +1,5 @@
+个人博客项目的编写
+只需在本地mysql数据库中创建一个blogdb数据库，包含一个users和一个blogs表即可
+users 含 id（自增）、title、content、createtime、author
+blogs 含 id（自增）、username、password、realname
+运行方式为 运行app.js

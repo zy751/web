@@ -1,0 +1,39 @@
+{
+	"pages":[
+		{"path":"pages/loginindex","style":{"navigationBarTitleText":"login"}},
+		{"path":"pages/index/index","style":{"navigationBarTitleText":"index"}},
+		{"path":"pages/paltform","style":{"navigationBarTitleText":"platform"}},
+		{"path":"pages/refresh","style":{"navigationBarTitleText":"refresh"}},		
+		{"path":"pages/audioplay","style":{"navigationBarTitleText":"audio"}},
+		{"path":"pages/videoplay","style":{"navigationBarTitleText":"video"}},
+		{"path":"pages/uniui","style":{"navigationBarTitleText":"icon"}},		
+		{"path":"pages/image","style":{"navigationBarTitleText":"images"}},
+		{"path":"pages/canvas","style":{"navigationBarTitleText":"canvas"}},
+		{"path":"pages/index/game","style":{"navigationBarTitleText":"game"}}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "uni-app",
+		"navigationBarBackgroundColor": "#007AFF",
+		"backgroundColor": "#FFFFFF",
+		"enablePullDownRefresh":true
+	},
+	"tabBar":{
+		"backgroundColor":"#FFFFFF",
+		"color":"#333333",
+		"list":[
+			{"pagePath":"pages/audioplay","iconPath":"static/imgs/QQ截图20200410145900.jpg","selectedIconPath":"static/imgs/QQ截图20200410145900.jpg","text":"音乐"},
+			{"pagePath":"pages/loginindex","iconPath":"static/imgs/b576dd79c10afc79942203571d1aabc8.png","selectedIconPath":"static/imgs/b576dd79c10afc79942203571d1aabc8.png","text":"我的"}
+		]
+	},
+	"condition":{
+		"current":1,
+		"list":[
+			{
+				"name":"canvas",
+				"path":"pages/canvas",
+				"query":""
+			}
+		]
+	}
+}

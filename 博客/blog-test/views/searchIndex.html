@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>搜索结果</title>
+</head>
+<body>
+<div class="right">
+    <% if(dataS) {%>
+    <% dataS.forEach(function(data){ %>
+    <h2><%=data.title %></h2>
+    <a href="/blog/detail?title=<%= data.title %>"><P><%= data.content%></P></a>
+    <% }) %> <% } %>
+    <% if(pageSum>1) {%>
+    <div id="page">
+        <% if(currentPage===1) {%>
+        <a style='pointer-events: none'>上一页</a><% } else { %>
+        <a href="/blog/index?page=<%=prePage %>">上一页</a><% } %>
+        <a href="/blog/index?page=<%=currentPage %>" style="pointer-events: none;color: gray" ><%= currentPage %></a>
+        <% if(currentPage===pageSum) {%>
+        <a style='pointer-events: none'>下一页</a><% } else {%>
+        <a href="/blog/index?page=<%= nextPage%>">下一页</a><% } %>
+        <p>共<%= pageSum %>页</p>
+    </div>
+    <%} %>
+</div>
+</body>
+</html>

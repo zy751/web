@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>修改密码</title>
+    <%- include('header.html') %>
+</head>
+<body>
+<form method="post" action='/changePwd'>
+    用户名:<input type="text" name="username" required><br>
+    原密码:<input type="password" name="oldpwd" required><br>
+    密码：<input type="password" name="newpwd" required><br>
+    确认密码：<input type="password" name="'repwd" required><br>
+    <input type="submit" value="确认修改">
+    <% if(msg) {%> <p style="color:red"><%= msg %></p><% } %>
+</form>
+</body>
+</html>
