@@ -1,0 +1,24 @@
+{% extends 'app/student/stuinfo.html' %}
+{% block title %}贷款申请{% endblock %}
+{% block detail %}
+    <div class="caidan right">
+    <form id="register" action="{% url 'app:submit' %}" method="post" >
+    <table class="table">
+        {% csrf_token%}
+                <tbody>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">真实姓名</td><td colspan="2"><input    name="StuName" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入您的名字" required value="{{ stu.StuName }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学号</td><td colspan="2"><input    name="StuNum" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入学号" required value="{{ stu.StuNum }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">性别</td><td colspan="2"><input class="myforms-3-2" type="text" style="line-height: 25px;border: none;outline:none" checked ="checked" name="Sex" value="{{ stu.get_Sex_display }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">联系方式</td><td ><input   name="Tel" style="line-height: 25px;border: none;outline:none" type="tel" minlength="11" maxlength="11" placeholder="请输入手机" required value="{{ stu.Tel }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">院系</td><td colspan="2"><input    name="department" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入院系" required value="{{ stu.get_department_display }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">专业</td><td colspan="2"><input    name="major" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入专业" required value="{{ stu.major }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">身份证</td><td colspan="2"><input    name="stuid" type="text" style="line-height: 25px;border: none;outline:none" placeholder="身份证" required value="{{ stu.stuid }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">常用邮箱</td><td colspan="2"><input    name="email" type="email" style="line-height: 25px;border: none;outline:none" placeholder="请输入邮箱(可不填)"  value="{{ stu.email }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">申请额度</td><td colspan="2"><input    name="edu" type="number" style=" -webkit-appearance: none !important; line-height: 25px;border: none;outline:none" placeholder="请输入要申请的额度"  required ></td></tr>
+            </tbody>
+    </table>
+    <button class="btn btn-success" type="submit" style="margin: 0 20% 0 20%;width: 60%" οnclick="registerid_submit()">提交</button>
+    <p><font color="red">注意：在驳回或审批前不可再提交</font></p>
+    </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,63 @@
+body {
+  height: 600px;
+  width: 100%;
+  margin: 0; }
+.caidan{
+  float: left;
+}
+.caidan.left{
+  width: 15%;
+  height: 100%;
+}
+.caidan.right{
+  width: 80%;
+  height: 100%;
+}
+li{
+  list-style: none;
+}
+.menu{
+  padding-left: 20px;
+  padding-bottom: 30px;
+}
+.menu li{
+  padding-left: 35px;
+  display: none;
+}
+.menu:hover li{
+  display: block;
+}
+a:hover{
+  color: blue;
+}
+.stuinfo{
+    padding-left: 200px;
+    border: 2px solid black;
+}
+.stuinfo .nosolid{
+  font-size: 30px;
+}
+.stuinfo td{
+  width: 300px;
+  height: 70px;
+  border: 2px solid black;
+  text-align: center;
+}
+.stuinfo th{
+  width: 300px;
+  height: 50px;
+  text-align: center;
+  background-color: yellowgreen;
+}
+.page{
+  position: relative;
+  top: 10%;
+  margin-left: 35%;
+}
+.page a{
+  font-size: 20px;
+}
+.current{
+  margin-left: 30px;
+  margin-right: 30px;
+}

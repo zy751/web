@@ -1,0 +1,44 @@
+{% extends 'app/base/base_tea.html' %}
+{% load staticfiles %}
+{% block title %}待审批{% endblock %}
+{% block detail %}
+    <div class="caidan right">
+    <h1>学号为{{ daik.num.Stunum.StuNum }}的同学贷款信息如下</h1>
+            <table class="table">
+                <tbody>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生姓名</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.Stunum.StuName }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生学号</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.Stunum }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生院系</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.Stunum.get_department_display }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生专业</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.Stunum.major }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生性别</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.Stunum.get_Sex_display }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">预编码号</td><td colspan="2"><output    name="num"  style="line-height: 25px;border: none;outline:none"  >{{ daik.num.num}}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批人职工号</td><td colspan="2"><output    name="TeaNum"  style="line-height: 25px;border: none;outline:none"  >{{ daik.TeaNum.TeaNum }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批人姓名</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none"    ></output>{{ daik.TeaNum.TeaName }}</td></tr>                 
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">申请时间</td><td colspan="2"><output    name="TeaName"  style="line-height: 25px;border: none;outline:none"  ></output>{{ daik.num.time }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">额度</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none"    ></output>{{ daik.num.edu }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批时间</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none"    ></output>{{ daik.time }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">应还贷款</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none"    ></output>
+                {% if daik.need %}
+                    {{ daik.need }}
+                {% else %}
+                    <p id="moneyneed"></p>
+                {% endif %}
+                </td></tr>
+            </tbody>
+        </table>
+
+    <form action="{% url 'app:huankuan' daik.num.Stunum %}" method="post">
+    {% csrf_token %}
+        <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">还款金额</td><td ><input    name="money" type="number" style="line-height: 25px;border: none;outline:none" placeholder="不输入默认全还" ></td></tr>
+        <button >确定还款</button>
+    </form>
+
+<script>
+    date= new Date()
+    oldyear={{ daik.time.year }}
+    year=date.getFullYear()
+    oldmonth={{ daik.time.month }}
+    Month=date.getMonth()+1
+    money=((year-oldyear)*12+Month-oldmonth)*{{ daik.num.edu }}*0.05+{{ daik.num.edu }};
+    document.getElementById('moneyneed').innerHTML=money</script>
+{% endblock %}</div>

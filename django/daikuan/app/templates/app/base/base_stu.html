@@ -1,0 +1,107 @@
+{% extends 'app/base/base.html' %}
+{% load staticfiles %}
+{% block xinxi %}
+    {% if stu %}
+        <li><a>欢迎{{ stu.StuName }}同学</a></li><li><a href="{% url 'app:logout' %}">注销</a></li>
+    {% else %}
+        <li><a>欢迎{{ name.name }}同学</a></li><li><a href="{% url 'app:logout' %}">注销</a></li>
+    {%  endif %}
+{% endblock %}
+{% block css %}
+    <script>
+    var canvas,context,snows=[]
+    class Snow{
+                constructor(x,radis,speed,color){
+                    this.x=x;
+                    this.y=0;
+                    this.radis=radis;
+                    this.speed=speed;
+                    this.color=color
+                }
+                draw(context){
+                    context.save()
+                    context.translate(this.x,this.y)
+                    context.fillStyle=this.color
+                    context.beginPath()
+                    context.arc(0,0,this.radis,0,2*Math.PI,true)
+                    context.closePath()
+                    context.fill()
+                    context.restore()
+                }
+            }
+            function createSnow() {
+                if(snows.length<1000){
+                    let x=Math.random()*canvas.width+1
+                    let radis=Math.random()*3+1
+                    let speed=Math.random()*3+1
+                    let color='white'
+                    let snow=new Snow(x,radis,speed,color)
+                    snows.push(snow)
+                }
+            }
+            function snowMove(snow,index) {
+                snow.y+=snow.speed;
+                if(snow.y>canvas.height){
+                    snows.splice(index,1)
+                }else{
+                    snow.draw(context)
+                }
+            }
+            function init() {
+                requestAnimationFrame(init);
+                let back_img=new Image()
+                back_img.src='https://s2.ax1x.com/2019/05/25/VAY1nf.jpg'
+                context.clearRect(0,0,canvas.width,canvas.height);
+                context.drawImage(back_img,0,0,canvas.width,canvas.height);
+                createSnow();
+                snows.forEach(snowMove)
+            }
+        window.onload=function () {
+            canvas=document.getElementById('snow');
+            context=canvas.getContext('2d');
+            init()
+        }
+    </script>
+    <style>
+        body{
+            position: relative;
+        }
+        #game{
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/base2.css' %}">
+{% endblock %}
+{% block title %}江淮助学贷款系统{% endblock %}
+{% block content %}
+    <div class="caidan left">
+    <div class="menu">
+        信息查询
+       <li class="zicaidan"><a href="{% url 'app:stuinfo' %}">学生信息</a></li>
+        <li class="zicaidan"><a href="{% url 'app:daikuaninfo' %}">贷款信息</a></li>
+    </div>
+    <div class="menu">
+        申请
+       <li class="zicaidan"><a href="{% url 'app:daikuanshenq' %}">贷款申请</a></li>
+    </div>
+    </div>
+    {% if error_msg %}
+    <a href="{% url 'app:upload' %}"><font color="red" >{{ error_msg }}</font></a>
+    {%  endif %}
+    {% if erro_msg %}
+    <a href="{% url 'app:daikuanshenq' %}"><font color="red" >{{ erro_msg }}</font></a>
+    {%  endif %}
+    {% if mes %}
+        <a href="{% url 'app:daikuaninfo' %}"><font color="red" >{{ mes }}</font></a>
+    {% endif %}
+    {%  if mes2 %}
+        <a href="{%  url 'app:daikuanshenq2' %}"><font color="red" >{{ mes2}}</font></a>
+    {%  endif %}
+    {%  if err %}
+        <font color="red" style="position: absolute; top: 0;left: 0">{{ err }}</font>
+    {%  endif %}
+    {% block detail %} <canvas id="snow" style="width: 80%;height: 100%"> </canvas>{% endblock %}
+{%  endblock %}

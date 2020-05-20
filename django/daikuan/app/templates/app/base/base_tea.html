@@ -1,0 +1,98 @@
+{% extends 'app/base/base.html' %}
+{% load staticfiles %}
+{% block xinxi %}
+<li><a>欢迎{{ tea.TeaName }}老师</a></li>
+    <li><a href="{% url 'app:logout' %}">注销</a></li>
+{% endblock %}
+{% block css %}
+        <script>
+    var canvas,context,snows=[]
+    class Snow{
+                constructor(x,radis,speed,color){
+                    this.x=x;
+                    this.y=0;
+                    this.radis=radis;
+                    this.speed=speed;
+                    this.color=color
+                }
+                draw(context){
+                    context.save()
+                    context.translate(this.x,this.y)
+                    context.fillStyle=this.color
+                    context.beginPath()
+                    context.arc(0,0,this.radis,0,2*Math.PI,true)
+                    context.closePath()
+                    context.fill()
+                    context.restore()
+                }
+            }
+            function createSnow() {
+                if(snows.length<1000){
+                    let x=Math.random()*canvas.width+1
+                    let radis=Math.random()*3+1
+                    let speed=Math.random()*3+1
+                    let color='white'
+                    let snow=new Snow(x,radis,speed,color)
+                    snows.push(snow)
+                }
+            }
+            function snowMove(snow,index) {
+                snow.y+=snow.speed;
+                if(snow.y>canvas.height){
+                    snows.splice(index,1)
+                }else{
+                    snow.draw(context)
+                }
+            }
+            function init() {
+                requestAnimationFrame(init);
+                let back_img=new Image()
+                back_img.src='https://s2.ax1x.com/2019/05/25/VAY1nf.jpg'
+                context.clearRect(0,0,canvas.width,canvas.height);
+                context.drawImage(back_img,0,0,canvas.width,canvas.height);
+                createSnow();
+                snows.forEach(snowMove)
+            }
+        window.onload=function () {
+            canvas=document.getElementById('snow');
+            context=canvas.getContext('2d');
+            init()
+        }
+    </script>
+    <style>
+        body{
+            position: relative;
+        }
+        #game{
+            position: absolute;
+            top: 50%;
+            right: 50%;
+            transform: translate(-50%,-50%);
+        }
+    </style>
+    <link rel="stylesheet" href="{% static 'css/base2.css' %}">
+{% endblock %}
+{% block title %}江淮贷款系统{% endblock %}
+{% block content %}
+    <div class="caidan left">
+    <div class="menu">
+        信息查询
+       <li class="zicaidan"><a href="{% url 'app:allinfo' 1 %}">学生信息</a></li>
+        <li class="zicaidan"><a href="{% url 'app:daik2' 1 %}">贷款信息</a></li>
+        <li class="zicaidan"><a href="{% url 'app:teainfo' %}">个人信息</a></li>
+    </div>
+    <div class="menu">
+        审批
+       <li class="zicaidan"><a href="{% url 'app:daikuanshenp' 1 %}">贷款审批</a></li>
+    </div>
+     <div class="menu">
+        账号管理
+       <li class="zicaidan"><a href="{% url 'app:addadm'  %}">新建账号</a></li>
+       <li class="zicaidan"><a href="{% url 'app:deladm'  %}">删除账号</a></li>
+    </div>
+    </div>
+    <span style="color:red;">{{ error }}</span>
+    {% block detail %}
+        <canvas id="snow" style="width: 80%;height: 100%">
+    {% endblock %}
+{%  endblock %}

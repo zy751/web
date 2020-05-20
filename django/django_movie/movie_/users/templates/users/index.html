@@ -1,0 +1,112 @@
+{% extends 'users/common/templates.html' %}
+{% load staticfiles %}
+{% block formstyle %}
+    <link rel="stylesheet" href="{% static 'css/left-right.css' %}">
+    <style>
+    .left a{
+        color: white;
+        text-decoration: none;
+    }
+    .left h3{
+        color: white;
+        margin-left: 10px;
+    }
+    ul{
+        margin-left: 10px;
+        margin-bottom: 3px;
+        color: black;
+    }
+    #des{
+        position: absolute;
+        top:60%;
+        right:10px;
+        width: 45%;
+        height: 300px;
+
+    }
+    #des p{
+        color: white;
+    }
+    li{
+        width: 10%;
+        margin-right: 2px;
+        margin-bottom: 2px;
+        border: 1px solid black;
+        float: right;
+        list-style-type: none;
+        height: 100px;
+    }
+    img{
+        display: block;
+    }
+    li{
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+    }
+    li a{
+        display: inline-block;
+        width: 100%;
+        height: 100%;
+    }
+    .right{
+        position: relative;
+        background-color: black;
+    }
+    img{
+        width: 100%;
+        height:100%;
+    }
+    </style>
+    <script>
+        function getIt(A,name) {
+            if(A.getAttribute(name)){
+                return A.getAttribute(name)
+            }else{
+                return ''
+            }
+
+        }
+        function changeDE(tar) {
+            let imgsrc=tar.getAttribute('src')
+            document.getElementById('detail').setAttribute('src',imgsrc)
+            document.getElementById('title').innerHTML='片名:'+getIt(tar,'title')
+            document.getElementById('author').innerHTML='导演:'+getIt(tar,'author')
+            document.getElementById('pers').innerHTML='主演:'+getIt(tar,'pers')
+            document.getElementById('area').innerHTML='地区:'+getIt(tar,'area')
+            document.getElementById('year').innerHTML='年份:'+getIt(tar,'year')
+            document.getElementById('mes').innerHTML='简介:'+getIt(tar,'mes').slice(0,100)+'..'
+        }
+    </script>
+{% endblock %}
+{% block left %}
+    <div class="left">
+    <h3>随机推荐</h3>
+    {% for i in left %}
+
+        <ul style="width: 100%"><a href="{{ i.href }}">{{ forloop.counter }}:{{ i.title }}</a></ul>
+    {% endfor %}
+    </div>
+{% endblock %}
+{% block right %}
+    <div class="right">
+        <div class="detail" style="float: left; width: 50%;height: 100%">
+            <img id="detail" src="{{ first.imgsrc }}">
+        </div>
+        {% for i in tui %}
+            <li><a href="{{ i.href }}">
+                <img  onmouseenter="changeDE(this)" src="{{ i.imgsrc }}"
+                title="{{ i.title }}" author="{{ i.author }}" pers="{{ i.pers }}"
+                area="{{ i.area }}" year="{{ i.year }}" mes="{{ i.mes }}">
+            </a></li>
+        {% endfor %}
+        <div id="des">
+            <p id="title">片名:{{ first.title }}</p>
+            <p id="author">导演:{{ first.author }}</p>
+            <p id="pers">主演:{{ first.pers }}</p>
+            <p id="area">地区:{{ first.area }}</p>
+            <p id="year">年份:{{ first.year }}</p>
+            <p id="mes">简介:{{ first.mes }}</p>
+        </div>
+
+    </div>
+{% endblock %}

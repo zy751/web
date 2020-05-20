@@ -1,0 +1,33 @@
+{% extends 'Login/template.html' %}
+{% block title %}
+    登录
+{% endblock %}
+{% block form %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                <p class="{{ message.tags }}">{{ message }}</p>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+    <div class="form">
+
+
+    <form method="post">
+        {% csrf_token %}
+        <label>用户名：</label><input type="text" name="username" required><br>
+        <label>密码：</label><input type="password" name="pas" required><br>
+        <input type="submit" value="登录">
+        <button><a style="color: black;text-decoration: none" href="{% url 'user:reg' %}">注册</a></button>
+        <a href="{% url 'user:findP' %}">找回密码</a>
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level ==  DEFAULT_MESSAGE_LEVELS.ERROR %}
+                    <p class="{{ message.tags }}" style="color: red;text-align: center">{{ message }}</p>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+    </form>
+
+    </div>
+{% endblock %}

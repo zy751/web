@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+    <style>
+        .success{
+            background-color: orangered;
+            text-align: center;
+        }
+
+        form br{
+            line-height: 40px;
+        }
+        form label{
+            display: inline-block;
+            width: 80px;
+            text-align-last: justify;
+            text-align: justify;
+        }
+        form input[type='submit'],form button {
+            float: right;
+            margin-right: 10px;
+        }
+        .form {
+            width: 60%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(225,255,255,0.5);
+        }
+        form{
+              width: 40%;
+            height: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background-color: rgba(225,255,255,0.5);
+        }
+    </style>
+    <script>
+        window.onload=function () {
+            var mes
+            try {
+                mes=document.getElementsByClassName('success')[0].style
+            }catch (e) {
+                mes=false
+            }
+            if (mes){
+                setTimeout(function () {
+                     mes.display='none'
+                },4000)
+            }
+        }
+    </script>
+    {% block style %}
+    {% endblock %}
+</head>
+<body>
+    {% block form %}
+    {% endblock %}
+</body>
+</html>

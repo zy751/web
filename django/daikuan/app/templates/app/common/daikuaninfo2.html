@@ -1,0 +1,24 @@
+{% extends 'app/base/base_tea.html' %}
+{% load staticfiles %}
+{% block title %}贷款信息{% endblock %}
+{% block detail %}
+    <h1 style="text-align: center">所有贷款信息如下</h1>
+    <div class="caidan right">
+    <table class="stuinfo">
+            <tr><th>学号</th><th>申请时间</th><th>额度</th><th>审批时间</th><th>详情链接</th></tr>
+        {% for i in page %}
+            <tr><td>{{i.num.Stunum.StuNum}}</td><td>{{ i.num.time }}</td><td>{{ i.num.edu }}</td><td>{{ i.time}}</td><td><a class="nosolid" href="{% url 'app:dkdetail' i.num.Stunum %}" >click</a></td></tr>
+        {% endfor %}
+    </table>
+    <div class="page">
+        {% if page.has_previous %}
+            <a href="{% url 'app:allinfo' page.previous_page_number %}">上一页</a>
+        {% endif %}
+            <span class="current">第{{ page.number }}页/共{{ page.paginator.num_pages }}页 </span>
+        {% if page.has_next %}
+            <a href="{% url 'app:allinfo' page.next_page_number %}">下一页</a>
+        {% endif %}
+
+    </div>
+    </div>
+{% endblock %}

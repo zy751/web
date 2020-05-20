@@ -1,0 +1,28 @@
+{% extends 'app/base/base_tea.html' %}
+{% load staticfiles %}
+{% block title %}待审批{% endblock %}
+{% block detail %}
+    <div class="caidan right">
+         <form id="register" action="{% url 'app:shenh' stu.StuNum %}" method="post" >
+            <table class="table">
+                {% csrf_token %}
+                <tbody>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生姓名</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ stu.StuName }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生学号</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ stu.StuNum }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生院系</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ stu.get_department_display }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生专业</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ stu.major }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">申请时间</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ daikuan.time }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学生性别</td><td colspan="2"><output    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none"  ></output>{{ stu.get_Sex_display }}</td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">预编码号</td><td colspan="2"><input    name="num" type="text" style="line-height: 25px;border: none;outline:none"  required value="{{ daikuan.num}}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">您的职工号</td><td colspan="2"><input    name="TeaNum" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入职工号号" required value="{{ tea.TeaNum }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">额度</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none" type="tel" minlength="11" maxlength="11"  ></output>{{ daikuan.edu }}</td></tr>
+            </tbody>
+        </table>
+
+        <button class="btn btn-success" type="submit" style="margin: 0 30% 0 30%;width: 30%">审核通过</button>
+         </form>
+         <form action="{% url 'app:tuihui' stu.StuNum %}">
+             <button class="btn btn-success" type="submit" style="float: left;margin: 10px 30% 0 30%;width: 30%" >审核退回</button>
+         </form>
+
+{% endblock %}</div>

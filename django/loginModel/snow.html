@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>snow</title>
+    <script>
+        var snows=[],canvas,ctx
+        let back_img=new Image()
+        back_img.src='https://s2.ax1x.com/2019/05/25/VAY1nf.jpg'
+        class Snow{
+            constructor(x,radis,speed,color){
+                this.x=x
+                this.y=0
+                this.radis=radis
+                this.speed=speed
+                this.color=color
+            }
+            draw(){
+                ctx.save()
+                ctx.translate(this.x,this.y)
+                ctx.fillStyle=this.color
+                ctx.beginPath()
+                ctx.arc(0,0,this.radis,0,2*Math.PI)
+                ctx.closePath()
+                ctx.fill()
+                ctx.restore()
+            }
+        }
+
+        function createSnow(){
+            if(snows.length<1000){
+                let x=Math.random()*canvas.width
+                let speed=Math.random()*3+1
+                let radis=Math.random()*3+1
+                let color='white'
+                let snow=new Snow(x,radis,speed,color)
+                snows.push(snow)
+            }
+
+        }
+
+        function snowMove(snow,index){
+            snow.y+=snow.speed
+            if(snow.y>canvas.height){
+                snows.splice(index,1)
+            }
+            snow.draw()
+        }
+
+        function init(){
+            requestAnimationFrame(init)
+            ctx.drawImage(back_img,0,0,canvas.width,canvas.height)
+            createSnow()
+            snows.forEach(snowMove)
+        }
+        window.onload=function () {
+            canvas=document.getElementById('snow')
+            ctx=canvas.getContext('2d')
+            init()
+        }
+    </script>
+</head>
+<body>
+<canvas id="snow" style="width: 100%;height: 100%">
+
+</canvas>
+
+</body>
+</html>

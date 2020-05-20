@@ -1,0 +1,48 @@
+{% extends 'Login/template.html' %}
+{% block title %}
+    注册
+{% endblock %}
+{% block style %}
+    <script>
+        function insertBefore(el,tar) {
+            let par=tar.parentNode
+            if(tar===par.lastChild){
+                par.appendChild(el)
+            }else{
+                par.insertBefore(el,tar.nextSibling)
+            }
+        }
+        function check() {
+            let pwd=document.getElementById('pwd').value
+            let repwd=document.getElementById('repwd').value
+            if (pwd!==repwd){
+                let tar=document.getElementById('repwd')
+                let err=document.createElement('p')
+                err.style.color='red'
+                err.style.textAlign='center'
+                err.innerText='两次密码不一致'
+                insertBefore(err,tar)
+                return false
+            }
+            return true
+        }
+    </script>
+{% endblock %}
+{% block form %}
+    <div class="form">
+        <form method="post" onsubmit="return check()">
+            {% csrf_token %}
+            <label for="username">用户名：</label><input type="text" name="username" required><br>
+            <label for="pwd">密码：</label><input type="password" id='pwd' name="pwd" required><br>
+            <label for="repwd">重复密码：</label><input type="password" id='repwd' name="repwd" required>
+            <input type="submit" value="注册">
+            {% if messages %}
+                {% for message in messages %}
+                    {% if message.level ==  DEFAULT_MESSAGE_LEVELS.ERROR %}
+                        <p class="{{ message.tags }}" style="color: red;text-align: center">{{ message }}</p>
+                    {% endif %}
+                {% endfor %}
+            {% endif %}
+        </form>
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'users/common/templates.html' %}
+{% load staticfiles %}
+{% block title %}
+    注册
+{% endblock %}
+{% block formstyle %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form.css' %}">
+{% endblock %}
+{% block content %}
+       <form method="post">
+       {% csrf_token %}
+       <div>
+        账户：<input type="text" required name="username"><br>
+           <p style="color: red;">{{ msg }}</p>
+        密码: <input type="password" name="pwd" required><br>
+        确认密码: <input type="password" name="pwd" required><br>
+        <input type="submit" value="注册" style="float: right;">
+       </div>
+    </form>
+{% endblock %}

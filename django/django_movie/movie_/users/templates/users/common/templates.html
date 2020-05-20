@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load staticfiles %}
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}
+    {% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'css/top-navigator.css' %}">
+    {% block formstyle %}
+    {% endblock %}
+        <script>
+        function search() {
+            let keyword=document.getElementById('search').value
+            window.open('search?keyword='+keyword,'_self')
+        }
+        </script>
+</head>
+<body style="width: 100%;">
+        <div class="top">
+        <a class="theme" href="{% url 'users:index' %}">首页</a>
+        <a class="theme" href="{% url 'users:movie' %}" target="_blank">电影</a>
+        <a class="theme" href="{% url 'users:variety'  %}" target="_blank">连续剧</a>
+        <a class="theme" href="{% url 'users:sitcom'  %}" target="_blank">综艺</a>
+        <a class="theme" href="{% url 'users:comic'   %}" target="_blank">动漫</a>
+        {% if islogin %}
+            <a class='login' href="{% url 'users:logout' %}">注销</a>
+            <a class="login" href="{% url 'users:center' %}">个人中心</a>
+        {% else %}
+            <a class='login' href="{% url 'users:login' %}">登录</a>
+        {% endif %}
+
+        <div style="float: right; line-height: 32px">
+            {% csrf_token %}
+            <input id="search" style="border-radius: 10px;height: 80%"
+            onblur="if(this.value==''){this.value='请输入关键词';this.style.color='gray';}"
+            onfocus="if(this.value=='请输入关键词'){this.value='';this.style.color='black'}" value="请输入关键词">
+            <button onclick="search()">搜索</button>
+        </div>
+    </div>
+    {% block left %}
+    {% endblock %}
+    {% block content %}
+    {% endblock %}
+    {% block right %}
+    {% endblock %}
+</body>
+</html>

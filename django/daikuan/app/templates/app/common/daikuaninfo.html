@@ -1,0 +1,50 @@
+{% extends 'app/base/base_stu.html' %}
+{% load staticfiles %}
+{% block xinxi %}
+
+<li><a>欢迎{{ stu.StuName }}同学</a></li><li><a href="{% url 'app:logout' %}">注销</a></li>
+
+
+{% endblock %}
+{% block title %}贷款信息{% endblock %}
+{% block detail %}
+     <h1 style="text-align: center">您的贷款信息如下</h1>
+    <div class="caidan right">
+            <table class="table">
+                <tbody>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">真实姓名</td><td colspan="2"><output    name="StuName"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.num.Stunum.StuName }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">学号</td><td colspan="2"><output    name="StuNum"  style="line-height: 25px;border: none;outline:none"  >{{ daikuan.num.Stunum.StuNum }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">性别</td><td colspan="2"><output class="myforms-3-2"  style="line-height: 25px;border: none;outline:none"  name="Sex" >{{ daikuan.num.Stunum.get_Sex_display }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">联系方式</td><td ><output   name="Tel" style="line-height: 25px;border: none;outline:none"   >{{ daikuan.num.Stunum.Tel }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">院系</td><td colspan="2"><output    name="department"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.num.Stunum.get_department_display }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">专业</td><td colspan="2"><output    name="major"  style="line-height: 25px;border: none;outline:none"  >{{ daikuan.num.Stunum.major }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">身份证</td><td colspan="2"><output    name="stuid"  style="line-height: 25px;border: none;outline:none"  >{{ daikuan.num.Stunum.stuid }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">常用邮箱</td><td colspan="2"><output    name="email"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.num.Stunum.email }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">申请时间</td><td colspan="2"><output    name="email"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.num.time }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">申请额度</td><td colspan="2"><output    name="email"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.num.edu }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批时间</td><td colspan="2"><output    name="email"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.time }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批人</td><td colspan="2"><output    name="email"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.TeaNum.TeaName }}</output></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">审批人联系方式</td><td colspan="2"><output    name="phone"  style="line-height: 25px;border: none;outline:none" >{{ daikuan.TeaNum.Tel }}</output></td></tr>
+
+
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">应还贷款</td><td ><output   name="edu" style="line-height: 25px;border: none;outline:none"    ></output>
+                    {% if daikuan.need %}
+                        {{ daikuan.need }}
+                    {% else %}
+                        <p id="moneyneed"></p>
+                    {% endif %}</td></tr>
+
+                
+            </tbody>
+        </table>
+    </div>
+    <script>
+    date= new Date()
+    oldyear={{ daik.time.year }}
+    year=date.getFullYear()
+    oldmonth={{ daik.time.month }}
+    Month=date.getMonth()+1
+    money=((year-oldyear)*12+Month-oldmonth)*{{ daik.num.edu }}*0.05+{{ daik.num.edu }};
+    document.getElementById('moneyneed').innerHTML=money</script>
+{% endblock %}
+

@@ -1,0 +1,12 @@
+{% extends 'Login/template.html' %}
+{% block title %}
+    找回密码
+{% endblock %}
+{% block form %}
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">用户名：</label><input type="text" name="username"  required><br>
+        <label for="email">邮箱：</label><input type="text" name="email" required><br>
+        <input type="submit" value="确定"><p>{{ err }}</p>
+    </form>
+{% endblock %}

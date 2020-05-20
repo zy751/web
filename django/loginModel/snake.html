@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #checkbox{
+            width: 600px;
+            height: 600px;
+        }
+        #checkbox td{
+            width: 28px;
+            height: 14px;
+            border: 1px solid black;
+        }
+    </style>
+    <script>
+        var checkbox,egg,eggnum=0,preD=3,dir,x=0,y=0,timer
+        function createBox(){
+            checkbox=document.getElementById('checkbox')
+            for(let i=0;i<30;i++){
+                let tr=checkbox.appendChild(document.createElement('tr'))
+                for(let j=0;j<30;j++){
+                    tr[j]=tr.appendChild(document.createElement('td'))
+                }
+                checkbox[i]=tr
+            }
+        }
+
+        class Snake{
+            constructor(speed){
+                this.speed=speed
+                this.body=[checkbox[0][0]]
+                this.body[0].style.backgroundColor='black'
+            }
+            move(){
+                clearInterval(timer)
+                dir=arguments[0]
+                if((preD===1&&dir===3)||(preD===3&&dir===1)||(preD===2&&dir===4)||(preD===4&&dir===2)){
+                    dir=preD
+                }
+                preD=dir
+                switch (dir) {
+                    case 1:y--;break;
+                    case 2:x--;break;
+                    case 3:y++;break;
+                    case 4:x++;break;
+                    default:break
+                }
+                if(y<0||x<0||x>29||y>29){
+                    clearInterval(timer)
+                    let f=confirm('game over,try again?')
+                    if(f){
+                        window.location.reload()
+                    }else{
+                        window.close()
+                    }
+                }
+                this.body.push(checkbox[x][y])
+                if (this.biteS()){
+                    clearInterval(timer)
+                    let f=confirm('game over,try again?')
+                    if(f){
+                        window.location.reload()
+                    }else{
+                        window.close()
+                    }
+                }
+                if(checkbox[x][y]===egg){
+                    makeEgg()
+                }else{
+                    this.body[0].style.backgroundColor='white'
+                    this.body.shift()
+                }
+                this.body[this.body.length-1].style.backgroundColor='black'
+                let self=this
+                timer=setInterval(function () {
+                    self.move(dir)
+                },this.speed)
+            }
+            biteS(){
+                let leng=this.body.length-1
+                for(let i=0;i<leng;i++){
+                    if (this.body[i]===this.body[leng]){
+                        return true
+                    }
+                }
+                return false
+            }
+        }
+
+        function randM(){
+            return Math.floor(Math.random()*30)
+        }
+
+        function makeEgg(){
+            eggnum+=1
+            egg=checkbox[randM()][randM()]
+            egg.style.backgroundColor='red'
+        }
+
+        window.onload=function () {
+            createBox()
+            let snake=new Snake(300)
+            makeEgg()
+            window.addEventListener('keydown',function (e) {
+                switch (e.keyCode) {
+                    case 37:snake.move(1);break;
+                    case 38:snake.move(2);break;
+                    case 39:snake.move(3);break;
+                    case 40:snake.move(4);break;
+                    default:break;
+                }
+            })
+
+        }
+    </script>
+</head>
+<body>
+<div id="checkbox">
+
+</div>
+
+</body>
+</html>

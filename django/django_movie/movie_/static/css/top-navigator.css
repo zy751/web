@@ -1,0 +1,30 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+.top{
+    background-color: black;
+}
+.login{
+    width: 5%;
+    margin-left: 5%;
+    float: right;
+}
+.top a{
+    color: white;
+    text-decoration: none;
+    width: 5% ;
+    display: inline-block;
+    height: 40px;
+    line-height: 40px;
+    margin-right: 2%;
+    text-align: center;
+    border-radius: 10px;
+}
+
+.top a:hover{
+    background-color: red;
+}
+.top a:active{
+    background-color: blue;
+}

@@ -1,0 +1,20 @@
+{% extends 'app/base/base_tea.html' %}
+{% load staticfiles %}
+{% block title %}教师信息{% endblock %}
+{% block detail %}
+    <h1 style="text-align: center">您的个人信息如下</h1>
+    <div class="caidan right">
+         <form id="register" action="{% url 'app:change' %}" method="post" >
+            <table class="table">
+                {% csrf_token %}
+                <tbody>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">真实姓名</td><td colspan="2"><input    name="TeaName" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入您的名字" required value="{{ tea.TeaName }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">职工号</td><td colspan="2"><input    name="TeaNum" type="text" style="line-height: 25px;border: none;outline:none" placeholder="请输入职工号号" required value="{{ tea.TeaNum }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">性别</td><td colspan="2"><input class="myforms-3-2" type="text" style="line-height: 25px;border: none;outline:none" checked ="checked" name="Sex" value="{{ tea.get_sex_display }}"></td></tr>
+                <tr><td  style="line-height: 25px;word-break: keep-all;white-space: nowrap;text-overflow: ellipsis;">联系方式</td><td ><input   name="Tel" style="line-height: 25px;border: none;outline:none" type="tel" minlength="11" maxlength="11" placeholder="请输入手机" required value="{{ tea.Tel }}"></td></tr>
+            </tbody>
+        </table>
+        <button class="btn btn-success" type="submit" style="margin: 0 20% 0 20%;width: 60%" οnclick="registerid_submit()">修改</button>
+         </form>
+    </div>
+{% endblock %}
