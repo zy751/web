@@ -5,4 +5,4 @@ export default {
     setMemberObj(data){
         this.globalData.loginStatus = data 
     }
-}
+}//编写全局变量
