@@ -1,13 +1,13 @@
 const express=require('express')
 const router=express.Router()
 const path=require('path')
-const pro=require('crypto')
+const pro=require('crypto')//加密要用
 
 function checkLogin(req){
     return req.cookies.login
 }
 
-router.get('/login',(req,res)=>{
+router.get('/login',(req,res)=>{//用户登录页
     var loginSta=checkLogin(req)
     if (loginSta){
         res.render('logSuc.html',{username:req.cookies.username,realname:req.cookies.realname})
@@ -16,7 +16,7 @@ router.get('/login',(req,res)=>{
     }
 })
 
-router.post('/login',(req,res)=>{
+router.post('/login',(req,res)=>{//用户登录后提交
     var username=req.body.username
     var pwd=req.body.pwd
     let md5=pro.createHash('md5')
@@ -36,11 +36,11 @@ router.post('/login',(req,res)=>{
 
 })
 
-router.get('/register',(req,res)=>{
+router.get('/register',(req,res)=>{//用户注册页
     res.render('register.html',{msg:''})
 })
 
-router.post('/register',(req,res)=>{
+router.post('/register',(req,res)=>{//用户注册信息提交
     let username=req.body.username
     let pwd=req.body.pwd
     let realname=req.body.realname
@@ -55,11 +55,11 @@ router.post('/register',(req,res)=>{
     })
 })
 
-router.get('/changePwd',(req,res)=>{
+router.get('/changePwd',(req,res)=>{//用户修改密码页
     res.render('changePwd.html',{msg:''})
 })
 
-router.post('/changePwd',(req,res)=>{
+router.post('/changePwd',(req,res)=>{//用户修改密码信息提交
     let username=req.body.username
     let oldpwd=req.body.oldpwd
     let newpwd=req.body.newpwd
@@ -76,7 +76,7 @@ router.post('/changePwd',(req,res)=>{
     })
 })
 
-router.get('/logout',(req,res)=>{
+router.get('/logout',(req,res)=>{//用户登出，清除登录状态
     if (checkLogin(req)){
         for(let i in req.cookies){
             res.clearCookie(`${i}`)
