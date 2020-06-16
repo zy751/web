@@ -3,12 +3,12 @@
 <head>
     <meta charset="utf-8">
     <script>
-        window.onload=function () {
+        window.onload=function () {//页面加载完毕，开始画钟表
             let canvas=document.getElementById('clock')
             let ctx=canvas.getContext('2d')
             var pi=Math.PI
-            init()
-            function drawBack(ctx) {
+            init()//画钟表
+            function drawBack(ctx) {//画钟表盘和十二个刻度
                 ctx.clearRect(0,0,400,400)
                 ctx.save()
                 ctx.translate(200,200)
@@ -31,7 +31,7 @@
                 }
                 ctx.restore()
             }
-            function drawAllHands(ctx) {
+            function drawAllHands(ctx) {//提供参数画三个指针
                 let T=new Date()
                 let S=T.getSeconds()
                 let M=T.getMinutes()
@@ -43,7 +43,7 @@
                 drawHand(ctx,Mangle,160,3,'black')
                 drawHand(ctx,Hangle,70,6,'black')
             }
-            function drawHand(ctx,angle,length,width,color) {
+            function drawHand(ctx,angle,length,width,color) {//根据参数画指针
                 ctx.save()
                 ctx.translate(200,200)
                 ctx.rotate(-pi/2+angle)
