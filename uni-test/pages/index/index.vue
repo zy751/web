@@ -65,21 +65,21 @@
 			return {
 				
 				islogin:false,
-				images:[{src:'../../static/学生登录逻辑.jpg'},
+				images:[{src:'../../static/学生登录逻辑.jpg'},//做轮播图用的
 						{src:'../../static/教师逻辑.jpg'},
 						{src:'../../static/教师登录首页.jpg'},
 						{src:'../../static/学生登录首页.jpg'}],
 				indicator:true,
 				autoplay:true,
 				duration:2000,
-				interval:2000,
+				interval:2000,//轮播图的一些参数
 				localname:'',
 				sex:'man',
 				youselect:['中国'],
 				indexofA:0,
 				time:currenTime,
 				today:currentDay,
-				items: [{
+				items: [{//地区选择器
 				                        value: 'USA',
 				                        name: '美国'
 				                    },
@@ -108,15 +108,15 @@
 				
 			}
 		},
-		onPullDownRefresh() {
+		onPullDownRefresh() {//下拉刷新
 			uni.navigateTo({
 				url:'../index/index'
 			})
 		},
-		onShareAppMessage() {
+		onShareAppMessage() {//分享触发事件
 			console.log('aaa')
 		},
-		onLoad() {	
+		onLoad() {	//加载触发事件
 			this.islogin=global.isLogin()&&true
 			if(this.islogin){
 				this.localname=global.isLogin().username
@@ -126,7 +126,7 @@
 			}
 		},
 	
-		computed:{
+		computed:{//页面加载后就会计算的内容
 
 			youselected:function(){
 			return this.youselect.join(',')
@@ -144,22 +144,22 @@
 			}
 		},
 		methods: {
-			gotologin(){
+			gotologin(){//登录
 				console.log('zheng')
 				uni.switchTab({
 					url:'../loginindex'
 				})
 			},
-			changePlay(){
+			changePlay(){//自动状态切换
 				this.autoplay=!this.autoplay
 			},
-			changeDot(){
+			changeDot(){//显示点切换
 				this.indicator=!this.indicator
 			},
-			changeDu(e){
+			changeDu(e){//更改持续时间
 				this.duration=e.target.value
 			},
-			changeIn(e){
+			changeIn(e){//更改过渡时间
 				this.interval=e.target.value
 			},
 			changeVa(e){
