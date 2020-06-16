@@ -34,7 +34,7 @@
 			});
 		},
 		methods:{
-			getGtime(e){
+			getGtime(e){//进度条
 				this.getime=e.detail.currentTime.toFixed(0)
 				this.percent=(e.detail.currentTime*100/e.detail.duration).toFixed(0)
 			},
