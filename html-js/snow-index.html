@@ -83,15 +83,15 @@
             let snows=[];
             let back_img=new Image()
             back_img.src='https://s2.ax1x.com/2019/05/25/VAY1nf.jpg'
-            class Snow{
-                constructor(x,radius,speed,color){
+            class Snow{//定义雪类
+                constructor(x,radius,speed,color){//高度不变，其余参数指定
                     this.x=x;
                     this.y=0;
                     this.radius=radius;
                     this.speed=speed;
                     this.color=color
                 }
-                draw(context){
+                draw(context){//画雪
                     context.save();
                     context.translate(this.x,this.y);
                     context.fillStyle=this.color
@@ -102,7 +102,7 @@
                     context.restore()
                 }
             }
-            function createSnow() {
+            function createSnow() {//造雪，随机出数值，并发创建的学放进一个数组内
                 if(snows.length<1000){
                     let x=Math.random()*canvas.width+1
                     let radius=Math.random()*3+1
@@ -112,7 +112,7 @@
                     snows.push(snow)
                 }
             }
-            function snowMove(snow,index) {
+            function snowMove(snow,index) {//定义雪的移动，移动后判断有没有超过画布，没有超过就渲染雪
                 snow.y+=snow.speed
                 if(snow.y>canvas.height){
                     snows.splice(index,1)
