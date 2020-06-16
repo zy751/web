@@ -28,7 +28,7 @@
     }</style>
     <script>
         let list=[],egg,eggNum=-1,x=0,y=0,timer,preD=3,snake;
-        function drawBack() {
+        function drawBack() {//创建蛇的活动区域
             let div=document.getElementById('chessboard')
             for(let i=0;i<30;i++){
                 let tr=div.appendChild(document.createElement('tr'))
@@ -41,35 +41,35 @@
         function ranIndex() {
             return Math.floor(Math.random()*30)
         }
-        function makeEgg() {
+        function makeEgg() {//在生成的区域中随机让一个区域背景变成红色代表食物（蛋）
             eggNum++
             egg=list[ranIndex()][ranIndex()]
             egg.style.backgroundColor='red'
             document.getElementById('warm').innerHTML=`吃了${eggNum}个`
         }
-        class Snake{
-            constructor(speed) {
+        class Snake{//创建蛇
+            constructor(speed) {//初始化是在第一个区域内，初始长度为1，颜色为黑，可改变运动速度
                 this.body=[list[0][0]]
                 this.body[0].style.backgroundColor='black'
                 this.speed=speed;
             }
-            move(){
-                clearInterval(timer)
-                let direction=arguments[0]
+            move(){//进行蛇的移动操作
+                clearInterval(timer)//你按下了键盘的方向键会重置自动移动的时间
+                let direction=arguments[0]//获得你按下的方向键返回结果
                 if ((direction===1&&preD===3)||(direction===3&&preD===1)){
                     direction=preD
                 }else if ((direction===2&&preD===4)||(direction===4&&preD===2)){
                     direction=preD
-                }
-                preD=direction
-                switch (direction) {
+                }//按下的方向与原方向相反不进行操作
+                preD=direction//其余情况就把当前移动方向赋值给 上一次运动方向
+                switch (direction) {//根据返回结果 让蛇进行相应的移动
                     case 1:y--;break;
                     case 2:x--;break;
                     case 3:y++;break;
                     case 4:x++;break;
                     default:return;
                 }
-                if (x<0||x>29||y<0||y>29){
+                if (x<0||x>29||y<0||y>29){//碰撞检测
                     clearInterval(timer)
                     let r=confirm('你撞墙了')
                     if(r){
@@ -79,8 +79,8 @@
                     }
 
                 }
-                this.body.push(list[x][y])
-                if(this.bself()){
+                this.body.push(list[x][y])//没有碰撞就先把下一个移动点添加进蛇的身体进行咬检测
+                if(this.bself()){//咬检测
                     clearInterval(timer)
                     let r=confirm('咬到自己了')
                     if(r) {
@@ -89,22 +89,21 @@
                         window.close()
                     }
                 }
-                if (list[x][y]===egg){
-                    this.body[0].style.backgroundColor='black'
+                if (list[x][y]===egg){//看下一个移动点是不是蛋的位置,是就造新蛋
                     makeEgg()
-                } else{
+                } else{//不是就 将尾部变成白色，移除身体
                     this.body[0].style.backgroundColor='white'
                     this.body.shift()
                 }
-                this.body[this.body.length-1].style.backgroundColor='black'
+                this.body[this.body.length-1].style.backgroundColor='black'//将头部变成黑色
                 let self=this
                 timer=setInterval(function () {
-                    self.move(direction)
+                    self.move(direction)//进行自动移动
                 },this.speed)
 
 
             }
-            bself(){
+            bself(){//检测是否咬到自己
                 let bodylength=this.body.length-1
                 for(let i=0;i<bodylength;i++){
                     if (this.body[bodylength]===this.body[i]){
@@ -118,9 +117,9 @@
         window.onload=function(){
             drawBack()
             makeEgg()
-            snake=new Snake(300)
-            window.addEventListener('keydown',function (e) {
-                switch (e.keyCode) {
+            snake=new Snake(300)//创建蛇，并初始化默认速度
+            window.addEventListener('keydown',function (e) {//增加事件监听
+                switch (e.keyCode) {//根据按下的方向键返回结果
                     case 37:snake.move(1);break;
                     case 38:snake.move(2);break;
                     case 39:snake.move(3);break;
@@ -130,7 +129,7 @@
 
             })
         }
-        function chSpeed(value) {
+        function chSpeed(value) {//更改蛇的移动速度
             let speed=document.getElementById('speed').value
             if(!speed){
                 if (snake.speed>100){
