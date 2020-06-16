@@ -3,16 +3,16 @@ const blogRouter=express.Router()
 const path=require('path')
 
 
-function checkLogin(req){
+function checkLogin(req){//检查登录状态，是存到cookie中的
     return req.cookies.login
 }
 
-blogRouter.get('/',(req,res)=>{
+blogRouter.get('/',(req,res)=>{//首页
     var username=req.cookies.username
     res.render('index.html',{username:username})
 })
 
-blogRouter.get('/blog/index',(req,res)=>{
+blogRouter.get('/blog/index',(req,res)=>{//登录页 做判断 已经登录跳转登录后首页，未登录跳转登录页
     if (checkLogin(req)){
         exec.getPageSum().then(data=>{
             var pageSum=data
@@ -49,7 +49,7 @@ blogRouter.get('/blog/index',(req,res)=>{
     }
 })
 
-blogRouter.get('/blog/detail',(req,res)=>{
+blogRouter.get('/blog/detail',(req,res)=>{//点击博客标题会进入博客详细页
     var title=req.query.title
     exec.findBlogT([title]).then(data=>{
         res.render('blogDetail.html',{title:data.title,content:data.content,author:data.author,createT:data.createtime})
@@ -70,7 +70,7 @@ blogRouter.get('/blog/search',(req,res)=>{
     })
 })
 
-blogRouter.get('/blog/searchMY',(req,res)=>{
+blogRouter.get('/blog/searchMY',(req,res)=>{//显示自己写的博客
     var author=req.cookies.username
     exec.findBlogM([author]).then(data=>{
         res.render('searchIndex.html',{dataS:data,pageSum:1})
